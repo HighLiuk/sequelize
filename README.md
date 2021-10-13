@@ -19,3 +19,15 @@ sequelize init
 ```
 
 2. In `config/config.json`, enter the data to connect to the database
+
+3. Create the Database by running:
+
+```bash
+sequelize db:create
+```
+
+4. Create your first model with migration:
+
+```bash
+sequelize model:generate --name User --attributes name:string,email:string,role:string
+```
