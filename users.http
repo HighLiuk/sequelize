@@ -10,3 +10,6 @@ Content-Type: application/json
 
 ### List all users
 GET http://localhost:5000/users
+
+### List one user
+GET http://localhost:5000/users/7740b31d-0365-4a2a-bda5-45c519980ded

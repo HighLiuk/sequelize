@@ -26,4 +26,20 @@ app.get("/", async (req, res) => {
   }
 })
 
+app.get("/:uuid", async (req, res) => {
+  const { uuid } = req.params
+
+  try {
+    const user = await User.findOne({
+      where: { uuid },
+    })
+    return res.json(user)
+  } catch (error) {
+    console.log(error)
+    return res.status(404).json({
+      error: "Resource not found",
+    })
+  }
+})
+
 module.exports = app
