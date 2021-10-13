@@ -31,3 +31,11 @@ sequelize db:create
 ```bash
 sequelize model:create --name User --attributes name:string,email:string,role:string
 ```
+
+## Migrations
+
+To run a migration, type:
+
+```bash
+sequelize db:migrate
+```
