@@ -14,4 +14,16 @@ app.post("/", async (req, res) => {
   }
 })
 
+app.get("/", async (req, res) => {
+  try {
+    const users = await User.findAll()
+    return res.json(users)
+  } catch (error) {
+    console.log(error)
+    return res.status(404).json({
+      error: "Something went wrong",
+    })
+  }
+})
+
 module.exports = app

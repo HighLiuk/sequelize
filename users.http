@@ -7,3 +7,6 @@ Content-Type: application/json
   "email": "john@email.com",
   "role": "admin"
 }
+
+### List all users
+GET http://localhost:5000/users
