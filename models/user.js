@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
 
+  /**
+   * Validators list in Sequelize:
+   * @see https://sequelize.org/master/manual/validations-and-constraints.html
+   */
   User.init(
     {
       uuid: {
@@ -33,14 +37,47 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notNull: {
+            msg: "User must have a name",
+          },
+          notEmpty: {
+            msg: "Name must not be empty",
+          },
+          is: {
+            args: /^[a-z]+( [a-z]+)*$/i,
+            msg: "Name can contain only letters",
+          },
+        },
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
+        validate: {
+          notNull: {
+            msg: "User must have an email",
+          },
+          notEmpty: {
+            msg: "Email must not be empty",
+          },
+          isEmail: {
+            msg: "Must be a valid email address",
+          },
+        },
       },
       role: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notNull: {
+            msg: "User must have a role",
+          },
+          isIn: {
+            args: [["admin", "owner", "user"]],
+            msg: "Role must be one of admin, owner or user",
+          },
+        },
       },
     },
     {

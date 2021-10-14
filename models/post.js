@@ -1,5 +1,7 @@
 "use strict"
+
 const { Model } = require("sequelize")
+
 module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
     /**
@@ -25,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   }
+
   Post.init(
     {
       uuid: {
@@ -34,6 +37,22 @@ module.exports = (sequelize, DataTypes) => {
       body: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Post must have a body",
+          },
+          notEmpty: {
+            msg: "body must not be empty",
+          },
+          isNumeric: {
+            args: false,
+            msg: "Body must be made of text",
+          },
+          max: {
+            args: 255,
+            msg: "Body is too long",
+          },
+        },
       },
     },
     {
@@ -42,5 +61,6 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Post",
     }
   )
+
   return Post
 }
