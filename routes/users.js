@@ -16,7 +16,7 @@ app.post("/", async (req, res) => {
 
 app.get("/", async (req, res) => {
   try {
-    const users = await User.findAll()
+    const users = await User.findAll({ include: "posts" })
     return res.json(users)
   } catch (error) {
     console.log(error)
@@ -32,6 +32,7 @@ app.get("/:uuid", async (req, res) => {
   try {
     const user = await User.findOne({
       where: { uuid },
+      include: "posts",
     })
     return res.json(user)
   } catch (error) {
