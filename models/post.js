@@ -15,7 +15,11 @@ module.exports = (sequelize, DataTypes) => {
      * Each time we return a post, we want to hide its id
      */
     toJSON() {
-      return { ...this.get(), id: undefined }
+      return {
+        ...this.get(),
+        id: undefined,
+        userId: undefined,
+      }
     }
   }
   Post.init(

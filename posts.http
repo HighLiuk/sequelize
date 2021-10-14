@@ -1,0 +1,8 @@
+### Create new post
+POST http://localhost:5000/posts
+Content-Type: application/json
+
+{
+  "userUuid": "7740b31d-0365-4a2a-bda5-45c519980ded",
+  "body": "This is a new post"
+}
