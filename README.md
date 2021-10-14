@@ -39,3 +39,15 @@ To run a migration, type:
 ```bash
 sequelize db:migrate
 ```
+
+To view the status of the migrations, type:
+
+```bash
+sequelize db:migrate:status
+```
+
+To rollback a batch of migrations, type:
+
+```bash
+sequelize db:migrate:undo
+```
