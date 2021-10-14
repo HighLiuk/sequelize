@@ -22,4 +22,14 @@ app.post("/", async (req, res) => {
   }
 })
 
+app.get("/", async (req, res) => {
+  try {
+    const posts = await Post.findAll({ include: "user" })
+    return res.json(posts)
+  } catch (error) {
+    console.log(error)
+    return res.status(400).json(error)
+  }
+})
+
 module.exports = app
