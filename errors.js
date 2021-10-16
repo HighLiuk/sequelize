@@ -1,4 +1,8 @@
-const { UniqueConstraintError, ValidationError } = require("sequelize")
+const {
+  UniqueConstraintError,
+  ValidationError,
+  EmptyResultError,
+} = require("sequelize")
 
 // error handling
 function errorHandler(err, req, res, next) {
@@ -25,6 +29,15 @@ function errorHandler(err, req, res, next) {
       message,
       field: path,
       value,
+    })
+  }
+
+  // Not Found Error
+  if (err instanceof EmptyResultError) {
+    return res.status(404).json({
+      status: "error",
+      type: "not found",
+      message: "resource not found",
     })
   }
 

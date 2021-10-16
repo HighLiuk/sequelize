@@ -9,33 +9,17 @@ app.post("/", (req, res, next) => {
     .catch(next)
 })
 
-app.get("/", async (req, res) => {
-  try {
-    const users = await User.findAll({ include: "posts" })
-    return res.json(users)
-  } catch (error) {
-    console.log(error)
-    return res.status(404).json({
-      error: "Something went wrong",
-    })
-  }
+app.get("/", (req, res, next) => {
+  User.findAll({ include: "posts" })
+    .then((users) => res.status(200).json({ users }))
+    .catch(next)
 })
 
-app.get("/:uuid", async (req, res) => {
+app.get("/:uuid", (req, res, next) => {
   const { uuid } = req.params
-
-  try {
-    const user = await User.findOne({
-      where: { uuid },
-      include: "posts",
-    })
-    return res.json(user)
-  } catch (error) {
-    console.log(error)
-    return res.status(404).json({
-      error: "Resource not found",
-    })
-  }
+  User.findOne({ where: { uuid }, include: "posts", rejectOnEmpty: true })
+    .then((user) => res.json(user))
+    .catch(next)
 })
 
 module.exports = app
