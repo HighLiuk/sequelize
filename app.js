@@ -10,6 +10,14 @@ app.use(express.json())
 app.use("/users", userRouter)
 app.use("/posts", postRouter)
 
+app.all("*", (req, res) => {
+  res.status(404).json({
+    status: "error",
+    type: "not found",
+    message: "page not found",
+  })
+})
+
 app.use(errorHandler)
 
 app.listen(5000, async () => {

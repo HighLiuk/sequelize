@@ -25,3 +25,7 @@ Content-Type: application/json
 
 ### Delete user
 DELETE http://localhost:5000/users/ca89f7cf-eba0-46e7-bbc5-f382802fd936
+
+
+### 404 Route
+GET http://localhost:5000/user/
