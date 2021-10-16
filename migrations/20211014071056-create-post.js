@@ -1,4 +1,5 @@
 "use strict"
+
 module.exports = {
   up: async (queryInterface, DataTypes) => {
     await queryInterface.createTable("posts", {
@@ -30,6 +31,7 @@ module.exports = {
       },
     })
   },
+
   down: async (queryInterface, DataTypes) => {
     await queryInterface.dropTable("posts")
   },
