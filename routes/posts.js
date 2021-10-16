@@ -2,34 +2,18 @@ const { Post, User } = require("../models/index")
 const express = require("express")
 const app = express.Router()
 
-app.post("/", async (req, res) => {
+app.post("/", (req, res, next) => {
   const { userUuid, body } = req.body
-
-  try {
-    const user = await User.findOne({
-      where: { uuid: userUuid },
-    })
-    const post = await Post.create({
-      body,
-      userId: user.id,
-    })
-    return res.status(201).json(post)
-  } catch (error) {
-    console.log(error)
-    return res.status(400).json({
-      error: "The user does not exists",
-    })
-  }
+  User.findOne({ where: { uuid: userUuid }, rejectOnEmpty: true })
+    .then((user) => Post.create({ body, userId: user.id }))
+    .then((post) => res.status(201).json(post))
+    .catch(next)
 })
 
-app.get("/", async (req, res) => {
-  try {
-    const posts = await Post.findAll({ include: "user" })
-    return res.json(posts)
-  } catch (error) {
-    console.log(error)
-    return res.status(400).json(error)
-  }
+app.get("/", (req, res, next) => {
+  Post.findAll({ include: "user" })
+    .then((posts) => res.json({ posts }))
+    .catch(next)
 })
 
 module.exports = app

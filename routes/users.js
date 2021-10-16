@@ -18,7 +18,7 @@ app.get("/", (req, res, next) => {
 app.get("/:uuid", (req, res, next) => {
   const { uuid } = req.params
   User.findOne({ where: { uuid }, include: "posts", rejectOnEmpty: true })
-    .then((user) => res.json(user))
+    .then((user) => res.status(200).json(user))
     .catch(next)
 })
 

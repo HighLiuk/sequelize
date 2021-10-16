@@ -44,10 +44,6 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: {
             msg: "body must not be empty",
           },
-          isNumeric: {
-            args: false,
-            msg: "Body must be made of text",
-          },
           max: {
             args: 255,
             msg: "Body is too long",
