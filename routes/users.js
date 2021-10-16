@@ -22,4 +22,27 @@ app.get("/:uuid", (req, res, next) => {
     .catch(next)
 })
 
+app.put("/:uuid", (req, res, next) => {
+  const { uuid } = req.params
+  const { name, email, role } = req.body
+  User.findOne({ where: { uuid }, rejectOnEmpty: true })
+    .then((user) => {
+      user.update({ name, email, role })
+      return user
+    })
+    .then((user) => res.status(201).json(user))
+    .catch(next)
+})
+
+app.delete("/:uuid", (req, res, next) => {
+  const { uuid } = req.params
+  User.findOne({ where: { uuid }, rejectOnEmpty: true })
+    .then((user) => {
+      user.destroy()
+      return user
+    })
+    .then((user) => res.status(200).json(user))
+    .catch(next)
+})
+
 module.exports = app

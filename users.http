@@ -3,8 +3,8 @@ POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-  "name": "John Doe",
-  "email": "john@email.com",
+  "name": "Luca Doe",
+  "email": "high@email.com",
   "role": "admin"
 }
 
@@ -13,3 +13,15 @@ GET http://localhost:5000/users
 
 ### List one user
 GET http://localhost:5000/users/7740b31d-0365-4a2a-bda5-45c519980ded
+
+### Update user
+PUT http://localhost:5000/users/7740b31d-0365-4a2a-bda5-45c519980ded
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "role": "admin"
+}
+
+### Delete user
+DELETE http://localhost:5000/users/ca89f7cf-eba0-46e7-bbc5-f382802fd936
