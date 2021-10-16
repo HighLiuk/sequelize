@@ -34,6 +34,12 @@ sequelize model:create --name User --attributes name:string,email:string,role:st
 
 ## Migrations
 
+To create a migration, type:
+
+```bash
+sequelize migration:create --name AddEmailColumn
+```
+
 To run a migration, type:
 
 ```bash
@@ -50,4 +56,12 @@ To rollback a batch of migrations, type:
 
 ```bash
 sequelize db:migrate:undo
+```
+
+## Seeds
+
+To create a seed, type:
+
+```bash
+sequelize seed:create --name CreateFakeUsers
 ```
